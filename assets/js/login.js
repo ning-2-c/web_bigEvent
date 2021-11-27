@@ -27,7 +27,7 @@ $(function(){
         e.preventDefault();
         //发起Ajax的post请求
         var data= {username:$('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()};
-        $.post('http://api-breakingnews-web.itheima.net/api/reguser',data,function(res){
+        $.post('/api/reguser',data,function(res){
                     if(res.status!==0){
                         return layer.msg(res.message);
                     }
@@ -40,7 +40,7 @@ $(function(){
     $('#form_login').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:'http://api-breakingnews-web.itheima.net/api/login',
+            url:'/api/login',
             method:'POST',
             data:$(this).serialize(),
             success:function(res){
@@ -50,6 +50,7 @@ $(function(){
                 layer.msg('登录成功！');
                 // console.log(res.token);
                 //跳转后台页面
+                localStorage.setItem('token',res.token);
                 location.href='/大事件项目/index.html';
             }
             
